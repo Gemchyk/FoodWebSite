@@ -1,13 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
 
-// function updateViewportsToPX(elementWidth, elementHeight)
-// {
-//     const width = window.innerWidth(elementWidth);
-//     const height = window.innerHeight(elementHeight);
-
-
-
-// }
 
 const gridContainer = document.querySelector("#restPages");
 
@@ -48,16 +40,22 @@ sliderButton.addEventListener("click", () => {
 });
 
 
-const menuButton = document.querySelector(".menuButton");
+const menuButton = Array.from(document.querySelectorAll(".menuButton"));
 const menu = document.querySelector("#menuDiv");
 const wholeMenu = document.querySelector(".wholeMenuDiv");
 
-menuButton.addEventListener('click', () => {
-    wholeMenu.classList.toggle("hidden");
-    menu.classList.toggle("shortMenu");
-    menu.classList.toggle("longMenu");
+function ShowOrHideMenu(wrapper, Menu, button){
+    menuButton[0].classList.toggle("hidden");
+    wrapper.classList.toggle("hidden");
+    Menu.classList.toggle("shortMenu");
+    Menu.classList.toggle("longMenu");
+}
 
-});
+menuButton.forEach(btn => {
+    btn.addEventListener('click', () => {
+        ShowOrHideMenu(wholeMenu, menu, btn);
+    });
+})
     
 
 
