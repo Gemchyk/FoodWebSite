@@ -1,3 +1,4 @@
+import { pythonStart } from "./app";
 window.addEventListener('DOMContentLoaded', () => {
 
 
@@ -60,10 +61,9 @@ menuButton.forEach(btn => {
 
 
 
-
-
-
 const userData = document.querySelector('#myForm');
+
+
 
 
 const postData = async (url, data) => {
@@ -78,6 +78,8 @@ const postData = async (url, data) => {
 
     return await res.json();
 };
+
+
 
 function sendData(form){
     form.addEventListener('submit', (e) => {
@@ -103,6 +105,7 @@ function sendData(form){
         request.addEventListener('load', () => {
             if(request.status === 200){
                 console.log('Bomba');
+                pythonStart();
             }
         });
     });
@@ -110,6 +113,7 @@ function sendData(form){
 
 
 sendData(userData);
+
 
 
 
