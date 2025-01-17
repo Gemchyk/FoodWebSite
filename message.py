@@ -44,7 +44,3 @@ with client:
 
 
 print("konec")
-
-
-
-
