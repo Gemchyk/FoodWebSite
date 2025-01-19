@@ -20,7 +20,7 @@ with open("db.json", "r") as file:
 data = db_data["requests"][-1]
 
 name = data["userName"]
-nickname = data["userEmail"]
+nickname = data["nickName"]
 people = data["numOfPeople"]
 time = data["Time"]
 date = data["Date"]
@@ -32,8 +32,7 @@ message = "Hello, " + name + ", you have booked table for " + people + " people 
 
 
 
-async def main():
-        
+async def main():   
     await client.send_message(nickname, message)
 
 

@@ -14,7 +14,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var child_process__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! child_process */ "?ed3c");
 /* harmony import */ var child_process__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(child_process__WEBPACK_IMPORTED_MODULE_0__);
-
 /*Just a script because I don't know why, but webpack doesn't work without it*/
 
 
@@ -42,7 +41,6 @@ function pythonStart(){
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (pythonStart);
-
 
 /***/ }),
 
@@ -157,9 +155,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 window.addEventListener('DOMContentLoaded', () => {
 
 
@@ -241,7 +236,6 @@ const postData = async (url, data) => {
 };
 
 
-
 function sendMessage() {
     $.ajax({
         type: "POST",
@@ -254,7 +248,6 @@ function callbackFunc(response) {
     // do something with the response
     console.log(response);
 }
-
 
 
 function sendData(form){
@@ -281,9 +274,7 @@ function sendData(form){
         request.addEventListener('load', () => {
             if(request.status === 200){
                 console.log('Bomba');
-
                 sendMessage();
-
             }
         });
     });
@@ -292,9 +283,7 @@ function sendData(form){
 
 sendData(userData);
 
-
 console.log(window.location.origin);
-
 
 
 });
