@@ -177,24 +177,74 @@ makeLayoutGrid(gridContainer, 6, 18, 1, 100);
 
 
 
+
 const slides = Array.from(document.querySelectorAll(".slide"));
-const sliderButton = document.querySelector('.Btn');
-let index = 0;
+const slider = document.querySelector(".slider");
+const prevButton = document.querySelector("#Prev");
+const nextButton = document.querySelector('#Next');
+let index = 2;
+
+const oneSliderMove = slides[0].offsetWidth;
+let sliderPosition = oneSliderMove * (slides.length / 2);  /*px*/
+
+const startSliderPosition = oneSliderMove * (slides.length / 2) + "px";
+const endSliderPosition = -oneSliderMove * ((slides.length - 4) / 2) + "px";
+slider.style.transform = `translate(${startSliderPosition})`;
+slider.style.transition = '0.4s all';
+
+console.log(slides.length / 2);
+
+console.log(startSliderPosition);
 
 
+nextButton.addEventListener("click", () => {
+    
+    
+    if(index == slides.length){
+        index = 2;
+        sliderPosition = oneSliderMove * (slides.length / 2);
+        slider.style.transform = `translate(${startSliderPosition})`;
+    }
+    else{
+        sliderPosition -= oneSliderMove;
+        slider.style.transform = `translate(${sliderPosition}px)`;
+        index++;
+    }
+    console.log(index);
 
-sliderButton.addEventListener("click", () => {
-    slides[index].classList.add('hidden');
-        if(index == slides.length - 1)
-        {
-            index = 0;
-        }
-        else{
-            index++;
-        }
-        
-        slides[index].classList.remove('hidden');
+    
+
 });
+
+prevButton.addEventListener("click", () => {
+   
+
+    // slides[index].classList.add('hidden');
+   //     if(index == slides.length - 1)
+   //     {
+   //         index = 0;
+   //     }
+   //     else{
+   //         index++;
+   //     }
+       
+   //     slides[index].classList.remove('hidden');
+
+
+   if(index == 2){
+    index = slides.length;
+    sliderPosition = -oneSliderMove * ((slides.length - 4) / 2);
+    slider.style.transform = `translate(${endSliderPosition})`;
+}
+else{
+    sliderPosition += oneSliderMove;
+    slider.style.transform = `translate(${sliderPosition}px)`;
+    index--;
+}
+console.log(index);
+
+});
+
 
 
 const menuButton = Array.from(document.querySelectorAll(".menuButton"));

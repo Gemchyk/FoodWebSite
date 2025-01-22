@@ -11,6 +11,7 @@ body
     align-items: center;
     flex-direction: column;
     background: rgb(41, 46, 54);
+    overflow-x: hidden;
 }
 
 
@@ -192,7 +193,7 @@ body
 }
 
 .shortInformation{
-    width: 100%;
+    width: 1440px;
     height: 20vh;
     display: flex;
     position: relative;
@@ -350,6 +351,17 @@ body
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+}
+
+.wholeClientsDiv{
+    width: 100%;
+    height: 1106px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 0;
+
 }
 
 .clientsHeader{
@@ -377,11 +389,24 @@ body
     display: none;
 }
 
+/*-----------------SLIDER-------------------*/
+
+.hidePartsOfSlider{
+    width: 240px;
+    height: 1106px;
+    position: relative;
+    z-index: 1;
+    background: rgb(41, 46, 54)
+}
+
 .slider{
-    width: 1360px;
+    width: 1730px;
     margin: 50px;
+    position: relative;
     display: flex;
     justify-content: center;
+    gap: 30px;
+    left: -544px;
 }
 
 .slide{
@@ -423,6 +448,12 @@ body
     color: white;
     font-size: 20px;
 }
+
+.buttonWrapper{
+    display: flex;
+    gap: 50px;
+}
+
 .Btn{
     width: 200px;
     height: 50px;
