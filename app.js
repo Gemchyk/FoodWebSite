@@ -1,7 +1,4 @@
 /*Just a script because I don't know why, but webpack doesn't work without it*/
-
-import {exec} from 'child_process';
-
 function pythonStart(){
     if (typeof window === 'undefined'){
         function startPythonScript() {

@@ -12,12 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var child_process__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! child_process */ "?ed3c");
-/* harmony import */ var child_process__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(child_process__WEBPACK_IMPORTED_MODULE_0__);
 /*Just a script because I don't know why, but webpack doesn't work without it*/
-
-
-
 function pythonStart(){
     if (typeof window === 'undefined'){
         function startPythonScript() {
@@ -217,19 +212,6 @@ nextButton.addEventListener("click", () => {
 });
 
 prevButton.addEventListener("click", () => {
-   
-
-    // slides[index].classList.add('hidden');
-   //     if(index == slides.length - 1)
-   //     {
-   //         index = 0;
-   //     }
-   //     else{
-   //         index++;
-   //     }
-       
-   //     slides[index].classList.remove('hidden');
-
 
    if(index == 2){
     index = slides.length;
@@ -262,7 +244,46 @@ menuButton.forEach(btn => {
     btn.addEventListener('click', () => {
         ShowOrHideMenu(wholeMenu, menu, btn);
     });
-})
+});
+
+
+
+function toggleHidden(item){
+
+    item.classList.toggle("hidden");
+
+}
+
+
+const changeSliderToGrid = document.querySelector("#flexButton");
+const changeSliderToFlex = document.querySelector("#gridButton");
+const hiddenPartsOfSlider = Array.from(document.querySelectorAll(".hidePartsOfSlider"));
+
+
+changeSliderToGrid.addEventListener("click", () => {
+    slider.style.transform = `translate(${0}px)`;
+    toggleHidden(changeSliderToGrid);
+    toggleHidden(changeSliderToFlex);
+    toggleHidden(prevButton);
+    toggleHidden(nextButton);
+    hiddenPartsOfSlider.forEach(i => {
+        i.style.background = "none";
+    });
+    slider.classList.toggle("flexSlider");
+    slider.classList.toggle("gridSlider");
+});
+changeSliderToFlex.addEventListener("click", () => {
+    slider.style.transform = `translate(${sliderPosition}px)`;
+    toggleHidden(changeSliderToFlex);
+    toggleHidden(changeSliderToGrid);
+    toggleHidden(prevButton);
+    toggleHidden(nextButton);
+    hiddenPartsOfSlider.forEach(i => {
+        i.style.background = "rgb(41, 46, 54)";
+    })
+    slider.classList.toggle("flexSlider");
+    slider.classList.toggle("gridSlider");
+});
     
 
 

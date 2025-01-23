@@ -64,19 +64,6 @@ nextButton.addEventListener("click", () => {
 });
 
 prevButton.addEventListener("click", () => {
-   
-
-    // slides[index].classList.add('hidden');
-   //     if(index == slides.length - 1)
-   //     {
-   //         index = 0;
-   //     }
-   //     else{
-   //         index++;
-   //     }
-       
-   //     slides[index].classList.remove('hidden');
-
 
    if(index == 2){
     index = slides.length;
@@ -109,7 +96,46 @@ menuButton.forEach(btn => {
     btn.addEventListener('click', () => {
         ShowOrHideMenu(wholeMenu, menu, btn);
     });
-})
+});
+
+
+
+function toggleHidden(item){
+
+    item.classList.toggle("hidden");
+
+}
+
+
+const changeSliderToGrid = document.querySelector("#flexButton");
+const changeSliderToFlex = document.querySelector("#gridButton");
+const hiddenPartsOfSlider = Array.from(document.querySelectorAll(".hidePartsOfSlider"));
+
+
+changeSliderToGrid.addEventListener("click", () => {
+    slider.style.transform = `translate(${0}px)`;
+    toggleHidden(changeSliderToGrid);
+    toggleHidden(changeSliderToFlex);
+    toggleHidden(prevButton);
+    toggleHidden(nextButton);
+    hiddenPartsOfSlider.forEach(i => {
+        i.style.background = "none";
+    });
+    slider.classList.toggle("flexSlider");
+    slider.classList.toggle("gridSlider");
+});
+changeSliderToFlex.addEventListener("click", () => {
+    slider.style.transform = `translate(${sliderPosition}px)`;
+    toggleHidden(changeSliderToFlex);
+    toggleHidden(changeSliderToGrid);
+    toggleHidden(prevButton);
+    toggleHidden(nextButton);
+    hiddenPartsOfSlider.forEach(i => {
+        i.style.background = "rgb(41, 46, 54)";
+    })
+    slider.classList.toggle("flexSlider");
+    slider.classList.toggle("gridSlider");
+});
     
 
 
