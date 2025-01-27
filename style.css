@@ -718,6 +718,15 @@ body
     align-items: center;
 }
 
+/*test up arrow*/
+
+.upArrow{
+    top: 80vh;
+    left: 80vw;
+    position: fixed;
+    z-index: 3;
+}
+
 
 
 

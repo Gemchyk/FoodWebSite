@@ -3,6 +3,7 @@ import json;
 
 import sys;
 
+print("konec")
 
 
 api_id = 26041803
@@ -21,6 +22,13 @@ data = db_data["requests"][-1]
 
 name = data["userName"]
 nickname = data["nickName"]
+# if data["nickName"].startswith('+3'):
+#     nickname = int(data["nickName"][1:])
+# elif data["nickName"].startswith('0'):
+#     nickname = int(data["nickName"])
+# else:
+#     nickname = data["nickName"]
+
 people = data["numOfPeople"]
 time = data["Time"]
 date = data["Date"]
@@ -42,4 +50,3 @@ with client:
 
 
 
-print("konec")
