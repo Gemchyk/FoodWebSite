@@ -1,231 +1,30 @@
 import 'nodelist-foreach-polyfill';
 
 
-import pythonStart from './app';
+import MakeLayoutGrid from './modules/gridLayout';
+import Slider from './modules/slider';
+import ShowAndHideMenu from './modules/showAndHideMenu';
+import ChangeSliderToGridLayout from './modules/changeSliderToGridLayout';
+import UpArrow from './modules/upArrow';
+import PostData from './modules/postData';
+
+
+
 window.addEventListener('DOMContentLoaded', () => {
 
 
 const gridContainer = document.querySelector("#restPages");
 
-function makeLayoutGrid(layout, colls, collLen, rows, rowLen){
+MakeLayoutGrid(gridContainer, 6, 18, 1, 100);
 
-    layout.style.display = 'grid';
-    layout.style.gridTemplateColumns = `repeat(${colls}, ${collLen}%)`;
-    layout.style.gridTemplateRows = `repeat(${rows}, ${rowLen}%)`;
-    layout.style.gap = '20px';
-    Array.from(gridContainer).forEach(e => {
-        e.target.style.display = 'flex';
-        e.target.style.alignItems = 'center';
-    });
+Slider();
+ShowAndHideMenu();
+ChangeSliderToGridLayout();
+PostData();
+UpArrow();
 
-}
-
-makeLayoutGrid(gridContainer, 6, 18, 1, 100);
-
-
-
-
-const slides = Array.from(document.querySelectorAll(".slide"));
-const slider = document.querySelector(".slider");
-const prevButton = document.querySelector("#Prev");
-const nextButton = document.querySelector('#Next');
-let index = 2;
-
-const oneSliderMove = slides[0].offsetWidth;
-let sliderPosition = oneSliderMove * (slides.length / 2);  /*px*/
-
-const startSliderPosition = oneSliderMove * (slides.length / 2) + "px";
-const endSliderPosition = -oneSliderMove * ((slides.length - 4) / 2) + "px";
-slider.style.transform = `translate(${startSliderPosition})`;
-slider.style.transition = '0.4s all';
-
-console.log(slides.length / 2);
-
-console.log(startSliderPosition);
-
-
-nextButton.addEventListener("click", () => {
-    
-    
-    if(index == slides.length){
-        index = 2;
-        sliderPosition = oneSliderMove * (slides.length / 2);
-        slider.style.transform = `translate(${startSliderPosition})`;
-    }
-    else{
-        sliderPosition -= oneSliderMove;
-        slider.style.transform = `translate(${sliderPosition}px)`;
-        index++;
-    }
-    console.log(index);
-
-    
-
-});
-
-prevButton.addEventListener("click", () => {
-
-   if(index == 2){
-    index = slides.length;
-    sliderPosition = -oneSliderMove * ((slides.length - 4) / 2);
-    slider.style.transform = `translate(${endSliderPosition})`;
-}
-else{
-    sliderPosition += oneSliderMove;
-    slider.style.transform = `translate(${sliderPosition}px)`;
-    index--;
-}
-console.log(index);
-
-});
-
-
-
-const menuButton = Array.from(document.querySelectorAll(".menuButton"));
-const menu = document.querySelector("#menuDiv");
-const wholeMenu = document.querySelector(".wholeMenuDiv");
-
-function ShowOrHideMenu(wrapper, Menu, button){
-    menuButton[0].classList.toggle("hidden");
-    wrapper.classList.toggle("hidden");
-    Menu.classList.toggle("shortMenu");
-    Menu.classList.toggle("longMenu");
-}
-
-menuButton.forEach(btn => {
-    btn.addEventListener('click', () => {
-        ShowOrHideMenu(wholeMenu, menu, btn);
-    });
-});
-
-
-
-function toggleHidden(item){
-
-    item.classList.toggle("hidden");
-
-}
-
-
-const changeSliderToGrid = document.querySelector("#flexButton");
-const changeSliderToFlex = document.querySelector("#gridButton");
-const hiddenPartsOfSlider = Array.from(document.querySelectorAll(".hidePartsOfSlider"));
-
-
-changeSliderToGrid.addEventListener("click", () => {
-    slider.style.transform = `translate(${0}px)`;
-    toggleHidden(changeSliderToGrid);
-    toggleHidden(changeSliderToFlex);
-    toggleHidden(prevButton);
-    toggleHidden(nextButton);
-    hiddenPartsOfSlider.forEach(i => {
-        i.style.background = "none";
-    });
-    slider.classList.toggle("flexSlider");
-    slider.classList.toggle("gridSlider");
-});
-changeSliderToFlex.addEventListener("click", () => {
-    slider.style.transform = `translate(${sliderPosition}px)`;
-    toggleHidden(changeSliderToFlex);
-    toggleHidden(changeSliderToGrid);
-    toggleHidden(prevButton);
-    toggleHidden(nextButton);
-    hiddenPartsOfSlider.forEach(i => {
-        i.style.background = "rgb(41, 46, 54)";
-    })
-    slider.classList.toggle("flexSlider");
-    slider.classList.toggle("gridSlider");
-});
-    
-
-
-
-const userData = document.querySelector('#myForm');
-
-
-
-
-const postData = async (url, data) => {
-    console.log(url);
-    let res = await fetch(url, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: data
-    });
-
-    return await res.json();
-};
-
-
-function sendMessage() {
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:5000/message",
-        success: callbackFunc("sudasuda")
-    });
-}
-
-function callbackFunc(response) {
-    // do something with the response
-    console.log(response);
-}
-
-
-function sendData(form){
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const request = new XMLHttpRequest();
-        request.open('POST', 'server.php');
-
-        request.setRequestHeader('Content-type', 'application/json');
-        const formData = new FormData(form);
-
-        const object = {};
-
-        formData.forEach((value, key) => {
-            object[key] = value;
-        });
-
-        const json = JSON.stringify(Object.fromEntries(formData.entries()));
-
-        postData('http://localhost:3000/requests', json)
-        request.send(json);
-
-        request.addEventListener('load', () => {
-            if(request.status === 200){
-                console.log('Bomba');
-                sendMessage();
-            }
-        });
-    });
-}
-
-
-sendData(userData);
 
 console.log(window.location.origin);
-
-
-
-/*----Up Arrow-----*/
-
-const arrow = document.querySelector(".upArrow");
-
-window.addEventListener("scroll", () => {
-    if(scrollY != 0 && arrow.classList.contains("hidden")){
-        arrow.classList.remove("hidden");
-    }
-    else if(scrollY == 0 && !arrow.classList.contains("hidden")){
-        arrow.classList.add("hidden");
-    }
-});
-
-arrow.addEventListener("click", () => {
-    window.location.href = "#Home"
-});
 
 
 });
